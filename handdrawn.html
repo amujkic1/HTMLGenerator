@@ -1,0 +1,50 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contour Analysis</title>
+        <style>
+            .draggable {
+                position: absolute;
+                cursor: grab;
+            }
+        </style>
+    </head>
+    <body>
+    <ul id="txt0" class="draggable" style="left: 451px; top: 625px; font-size: 18px;"><li>List item</li></ul><ul id="txt1" class="draggable" style="left: 81px; top: 595px; font-size: 18px;"><li>List item</li></ul><ul id="txt2" class="draggable" style="left: 446px; top: 585px; font-size: 18px;"><li>List item</li></ul><ul id="txt3" class="draggable" style="left: 82px; top: 562px; font-size: 18px;"><li>List item</li></ul><ul id="txt4" class="draggable" style="left: 443px; top: 544px; font-size: 18px;"><li>List item</li></ul><ul id="txt5" class="draggable" style="left: 81px; top: 530px; font-size: 18px;"><li>List item</li></ul><p id="txt6" class="draggable" style="left: 440px; top: 444px; font-size: 18px;">Some Text</p><p id="txt7" class="draggable" style="left: 73px; top: 433px; font-size: 18px;">Some Text</p><input id="input8" class="draggable" type="text" style="left: 440px; top: 363px; width: 213px; height: 47px;"><input id="input9" class="draggable" type="text" style="left: 72px; top: 341px; width: 245px; height: 51px;"><button id="btn10" class="draggable" style="left: 442px; top: 289px;">Click Me</button><button id="btn11" class="draggable" style="left: 63px; top: 253px;">Click Me</button><img id="img12" class="draggable" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Custom Shape" style="left: 439px; top: 121px; width: 219px; height: 123px;"><img id="img13" class="draggable" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Custom Shape" style="left: 49px; top: 70px; width: 194px; height: 146px;">
+        <script>
+            const draggableElements = document.querySelectorAll('.draggable');
+            let offsetX, offsetY, isDragging = false, activeElement;
+
+            draggableElements.forEach(element => {
+                element.addEventListener('mousedown', (event) => {
+                    isDragging = true;
+                    activeElement = element;
+                    offsetX = event.clientX - element.getBoundingClientRect().left;
+                    offsetY = event.clientY - element.getBoundingClientRect().top;
+                    element.style.cursor = 'grabbing';
+                });
+            });
+
+            document.addEventListener('mousemove', (event) => {
+                if (isDragging) {
+                    const x = event.clientX - offsetX;
+                    const y = event.clientY - offsetY;
+                    activeElement.style.left = `${x}px`;
+                    activeElement.style.top = `${y}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                if (activeElement) {
+                    activeElement.style.cursor = 'grab';
+                    activeElement = null;
+                }
+            });
+        </script>
+    </body>
+    </html>
+    
