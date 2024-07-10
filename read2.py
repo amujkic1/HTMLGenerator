@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Load the image
-image = cv2.imread('C:\\Users\\HP\\Desktop\\probni_set\\p1.jpg')
+image = cv2.imread('C:\\Users\\HP\\Desktop\\probni_set\\dipl1.jpg')
 
 # Resize the image
 desired_width = 1000
@@ -11,6 +11,9 @@ scaled_image = cv2.resize(image, (desired_width, desired_height))
 
 # Convert the image to grayscale
 gray_image = cv2.cvtColor(scaled_image, cv2.COLOR_BGR2GRAY)
+plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+plt.title('Grayscale')
+plt.show()
 
 # Apply Gaussian blur to reduce noise
 blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
@@ -22,7 +25,7 @@ edged = cv2.Canny(blurred_image, 30, 200)
 contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 # Filter out small contours (noise)
-min_contour_area = 50  # Adjust this threshold as needed
+min_contour_area = 1  # Adjust this threshold as needed
 filtered_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > min_contour_area]
 
 # Draw contours on the original image

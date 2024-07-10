@@ -20,7 +20,7 @@ def process_image_and_generate_html(image):
     contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     # Filter out small contours (noise)
-    min_contour_area = 50  # Adjust this threshold as needed
+    min_contour_area = 50
     filtered_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > min_contour_area]
 
     return filtered_contours
